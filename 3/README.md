@@ -4,8 +4,8 @@
 Примеры различных композ проектов от разработчиков Docker: [https://github.com/docker/awesome-compose/blob/master/wireguard/compose.yaml](https://github.com/docker/awesome-compose/tree/master)
 
 ### Дополнительная документация:
-  - ![блок networks: в compose](https://docs.docker.com/compose/compose-file/06-networks/)
-  - ![блок volumes: в compose](https://docs.docker.com/compose/compose-file/07-volumes/)
+  - блок networks: в compose: https://docs.docker.com/compose/compose-file/06-networks/
+  - блок volumes: в compose: https://docs.docker.com/compose/compose-file/07-volumes/
 
 ## Задание 1
 
