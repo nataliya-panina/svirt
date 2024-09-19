@@ -9,5 +9,6 @@
 ---
 Дополнительные материалы:
 
-C:\Users\Moi.NINKEAR\Documents\Docker-na-praktike.pdf
-https://kubernetes.io/ru/docs/home/index.html
+C:\Users\Moi.NINKEAR\Documents\Docker-na-praktike.pdf  
+
+https://kubernetes.io/ru/docs/home/index.html  
