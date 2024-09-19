@@ -10,4 +10,4 @@
 Дополнительные материалы:
 
 ![Докер на практике](‪C:\Users\Moi.NINKEAR\Documents\Docker-na-praktike.pdf)  
-![Kubernetes](https://kubernetes.io/ru/docs/home/)  
+![Kubernetes](https://kubernetes.io/ru/docs/home/index.html)  
