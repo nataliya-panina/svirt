@@ -15,6 +15,8 @@
 
 ## Решение
 
+Docker compose - это решение для запуска и управления несколькими контейнерами, вместе составляющими одно приложение, одновременно, при помощи файла конфигурации YAML. Один раз написанный и протестированный файл конфигурации исключает ошибки, которые можно допустить при запуске контейнеров вручную.
+
 ---
 ## Задание 2 
 
@@ -31,9 +33,31 @@
 Ваша подсеть должна называться: <ваши фамилия и инициалы>-my-netology-hw.
 Все приложения из последующих заданий должны находиться в этой конфигурации.
 
-
 ## Решение
+```
+https://hub.docker.com/r/prom/prometheus
+mkdir prometheus
+cd prometheus
+nano compose.yml
+```
 
+Compose.yml:
+
+```
+version: '3'
+services:
+
+volumes:
+
+networks:
+  paninang-netology-hw:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+        gateway: 10.5.0.1
+```
+        
 ---
 ## Задание 3 
 
@@ -46,6 +70,39 @@
 ---
 
 ## Решение
+
+compose.yml
+```
+services:
+  prometheus:
+    image: prom/prometheus:v2.53.1
+    container_name: paninang-prometheus
+    command: --web.enable-lifecycle --config.file=/etc/prometheus/prometheus.yml
+    ports:
+      - 9090:9090
+    volumes:
+      - ./:/etc/prometheus
+      - prometheus-data:/prometheus
+    networks:
+      - paninang-netology-hw
+    restart: always
+volumes:
+  prometheus-data:
+networks:
+  paninang-netology-hw:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/16
+        gateway: 10.5.0.1
+```
+```
+docker compose up -d
+```
+
+![image](https://github.com/user-attachments/assets/fd52af99-b8d2-4549-a4bc-0a3e88b0ffa5)
+
+![image](https://github.com/user-attachments/assets/bf804ed5-f362-4bb6-90eb-ef6c6ed5a73c)
 
 ---
 ## Задание 4 
