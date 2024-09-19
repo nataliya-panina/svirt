@@ -6,6 +6,8 @@
 4. ![Домашнее задание к занятию «Docker. Часть 2»](https://github.com/nataliya-panina/svirt/blob/main/3/README.md)
 5. ![Домашнее задание к занятию «Kubernetes. Часть 1»](https://github.com/nataliya-panina/svirt/blob/main/4/README.md)
 6. ![Домашнее задание к занятию «Kubernetes. Часть 2»](https://github.com/nataliya-panina/svirt/blob/main/5/README.md)
+---
 Дополнительные материалы:
-![Докер на практике](‪C:\Users\Moi.NINKEAR\Documents\Docker-na-praktike.pdf)
-![Kubernetes](https://kubernetes.io/docs/ru)
+
+![Докер на практике](‪C:\Users\Moi.NINKEAR\Documents\Docker-na-praktike.pdf)  
+![Kubernetes](https://kubernetes.io/docs/ru)  
