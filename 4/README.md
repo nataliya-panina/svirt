@@ -11,6 +11,26 @@
 
 ## Решение
 
+```
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube_latest_amd64.deb
+sudo dpkg -i minikube_latest_amd64.deb
+```
+![image](https://github.com/user-attachments/assets/01c22c40-cc58-48cc-8cc4-7319a924febf)
+
+```
+minikube start
+```
+Установка утилиты kubectl:
+```
+curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+```
+```
+kubectl get po -A
+```
+
+![image](https://github.com/user-attachments/assets/20bea242-1e66-412d-a2df-6c1f712857c8)
+
 ---
 ## Задание 2
 
