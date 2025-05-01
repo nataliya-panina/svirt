@@ -120,7 +120,7 @@ apt install nano -y
 nano /etc/nginx/conf.d/default.conf
 nginx -s reload
 ```
-![curl](https://github.com/nataliya-panina/svirt/blob/devops/05-virt-03-docker-intro/img/curl_custom-nginx.png)
+![curl](https://github.com/nataliya-panina/svirt/blob/devops/05-virt-03-docker-intro/img/docker_exec.png)
 
 ![Docker rm](https://github.com/nataliya-panina/svirt/blob/devops/05-virt-03-docker-intro/img/Docker_rm.png)
 
