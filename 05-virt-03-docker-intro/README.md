@@ -227,6 +227,9 @@ docker push localhost:5000/custom-nginx:latest # загрузка образа �
 ## Deployment error
 Failed to deploy a stack: compose up operation failed: Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint nginx-nginx-1 (45f835ad1db14210f8e3ed401da921e5d33962ce3e7dd2d82b8314f2d1f80dd6): failed to bind host port for 0.0.0.0:9090:172.18.0.2:80/tcp: address already in use
 
+![ss-tlpn](https://github.com/nataliya-panina/svirt/blob/devops/05-virt-03-docker-intro/img/ss-tlpn.png)
+Не могу понять где ошибка
+
 ---
 
 ### Правила приема
