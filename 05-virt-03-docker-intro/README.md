@@ -76,7 +76,7 @@ CONTAINER ID   IMAGE                            COMMAND                  CREATED
 ---
 4. Убедитесь с помощью curl или веб браузера, что индекс-страница доступна.
 ---
-[curl http://127.0.0.1:8082](https://github.com/nataliya-panina/svirt/blob/devops/05-virt-03-docker-intro/img/curl_custom-nginx.png)
+![curl http://127.0.0.1:8082](https://github.com/nataliya-panina/svirt/blob/devops/05-virt-03-docker-intro/img/curl_custom-nginx.png)
 
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод.
 
