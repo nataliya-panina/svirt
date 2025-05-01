@@ -28,15 +28,55 @@ Hey, Netology
 ```
 - Соберите и отправьте созданный образ в свой dockerhub-репозитории c tag 1.0.0 (ТОЛЬКО ЕСЛИ ЕСТЬ ДОСТУП). 
 - Предоставьте ответ в виде ссылки на https://hub.docker.com/<username_repo>/custom-nginx/general .
+---
+## Решение
+
+```
+docker version
+docker pull nginx:1.21.1
+nano Dockerfile
+```
+[Dockerfile]()
+
+```
+docker build . -t natapanina/custom-nginx:v1.0.0
+
+docker push natapanina/custom-nginx:v1.0.0
+```
+[custom-nginx](https://hub.docker.com/repository/docker/natapanina/custom-nginx/general)
 
 ## Задача 2
 1. Запустите ваш образ custom-nginx:1.0.0 командой docker run в соответвии с требованиями:
 - имя контейнера "ФИО-custom-nginx-t2"
 - контейнер работает в фоне
 - контейнер опубликован на порту хост системы 127.0.0.1:8080
+## Решение
+```
+docker run --rm -dti --name png-custom-nginx-t2 -p 8082:80 natapanina/custom-nginx:v1.0.0
+```
+
 2. Не удаляя, переименуйте контейнер в "custom-nginx-t2"
+
+```
+docker rename png-custom-nginx-t2 custom-nginx-t2
+docker ps
+CONTAINER ID   IMAGE                            COMMAND                  CREATED              STATUS              PORTS                                     NAMES
+50d3c1ab67d6   natapanina/custom-nginx:v1.0.0   "/docker-entrypoint.…"   About a minute ago   Up About a minute   0.0.0.0:8082->80/tcp, [::]:8082->80/tcp   custom-nginx-t2
+```
+
+---
 3. Выполните команду ```date +"%d-%m-%Y %T.%N %Z" ; sleep 0.150 ; docker ps ; ss -tlpn | grep 127.0.0.1:8080  ; docker logs custom-nginx-t2 -n1 ; docker exec -it custom-nginx-t2 base64 /usr/share/nginx/html/index.html```
+---
+```
+date +"%d-%m-%Y %T.%N %Z" ; sleep 0.150 ; docker ps ; ss -tlpn | grep 127.0.0.1:8080  ; docker logs custom-nginx-t2 -n1 ; docker exec -it custom-nginx-t2 base64 /usr/share/nginx/html/index.html
+01-05-2025 12:44:37.465899769 CEST
+CONTAINER ID   IMAGE                            COMMAND                  CREATED         STATUS         PORTS                                     NAMES
+50d3c1ab67d6   natapanina/custom-nginx:v1.0.0   "/docker-entrypoint.…"   3 minutes ago   Up 3 minutes   0.0.0.0:8082->80/tcp, [::]:8082->80/tcp   custom-nginx-t2
+```
+---
 4. Убедитесь с помощью curl или веб браузера, что индекс-страница доступна.
+---
+[curl http://127.0.0.1:8082]()
 
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод.
 
@@ -57,6 +97,33 @@ Hey, Netology
 
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод.
 
+## Решение
+```
+docker --help
+Commands:
+  attach      Attach local standard input, output, and error streams to a running container  
+```
+
+```
+docker attach custom-nginx-t2 #Подключает к контейнеру STDIN/STDOUT:STDERR
+```
+![docker attach]()  
+При нажатии Ctrl-C все работающие в контейнере процессы получают сигнал SIGINT и завершают свою работу, при этом посылая сигналы SIGCHILD родительскому процессу. После завершения работы дочерних процессов, прародитель (PID=1) - процесс самого контейнера, тоже останавливается. 
+![SIGINT]()
+![SIGCHILD]()
+
+```
+docker run --rm -dti --name custom-nginx-t2 -p 8082:80 natapanina/custom-nginx:v1.0.0
+docker exec -it custom-nginx-t2 bash
+apt update
+apt install nano -y
+nano /etc/nginx/conf.d/default.conf
+nginx -s reload
+```
+![curl]()
+
+![Docker rm]()
+
 ## Задача 4
 
 
@@ -68,6 +135,14 @@ Hey, Netology
 
 
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод.
+
+## Решение
+```
+docker run --rm -dti --name centos -v $(pwd):/data centos:7.9.2009
+docker run --rm -dti --name debian -v /$(pwd):/data debian
+docker exec -it centos bash
+```
+![Volumes]()
 
 
 ## Задача 5
@@ -117,10 +192,43 @@ services:
 
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод, файл compose.yaml , скриншот portainer c задеплоенным компоузом.
 
+## Решение
+
+![Composes]()
+Название файла по умолчанию должно быть compose.yaml или compose.yml, также поддерживаются docker-compose.yaml и docker-compose.yml, но они перешли из более старых версий утилиты. При наличии обоих файлов, предпочтение отдаётся compose.yaml
+
+Чтобы обе версии сработали, нужно просто включить файл docker-compose.yml в compose.yml при помощи include:
+
+```
+nano compose.yml
+
+version: "3"
+include:
+  - docker-compose.yml
+services:
+  portainer:
+    network_mode: host
+    image: portainer/portainer-ce:latest
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+```
+
+```
+docker compose up -d
+```
+![Both_composes]()
+```
+docker tag natapanina/custom-nginx:v1.0.0 localhost:5000/custom-nginx:latest # Тэгирование образа для локального репозитория
+docker push localhost:5000/custom-nginx:latest # загрузка образа в локальный репозиторий
+
+```
+Дальше при попытке задеплоить получаю ошибку:
+
+## Deployment error
+Failed to deploy a stack: compose up operation failed: Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint nginx-nginx-1 (45f835ad1db14210f8e3ed401da921e5d33962ce3e7dd2d82b8314f2d1f80dd6): failed to bind host port for 0.0.0.0:9090:172.18.0.2:80/tcp: address already in use
+
 ---
 
 ### Правила приема
 
 Домашнее задание выполните в файле readme.md в GitHub-репозитории. В личном кабинете отправьте на проверку ссылку на .md-файл в вашем репозитории.
-
-
