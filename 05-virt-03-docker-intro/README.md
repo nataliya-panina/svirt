@@ -36,7 +36,7 @@ docker version
 docker pull nginx:1.21.1
 nano Dockerfile
 ```
-[Dockerfile]()
+[Dockerfile](https://github.com/nataliya-panina/svirt/edit/devops/05-virt-03-docker-intro/Dockerfile)
 
 ```
 docker build . -t natapanina/custom-nginx:v1.0.0
@@ -76,7 +76,7 @@ CONTAINER ID   IMAGE                            COMMAND                  CREATED
 ---
 4. Убедитесь с помощью curl или веб браузера, что индекс-страница доступна.
 ---
-[curl http://127.0.0.1:8082]()
+[curl http://127.0.0.1:8082](https://github.com/nataliya-panina/svirt/edit/devops/05-virt-03-docker-intro/img/curl_custom-nginx.png)
 
 В качестве ответа приложите скриншоты консоли, где видно все введенные команды и их вывод.
 
@@ -107,10 +107,10 @@ Commands:
 ```
 docker attach custom-nginx-t2 #Подключает к контейнеру STDIN/STDOUT:STDERR
 ```
-![docker attach]()  
+![docker attach](https://github.com/nataliya-panina/svirt/edit/devops/05-virt-03-docker-intro/img/DockerAttach.png)  
 При нажатии Ctrl-C все работающие в контейнере процессы получают сигнал SIGINT и завершают свою работу, при этом посылая сигналы SIGCHILD родительскому процессу. После завершения работы дочерних процессов, прародитель (PID=1) - процесс самого контейнера, тоже останавливается. 
-![SIGINT]()
-![SIGCHILD]()
+![SIGINT](https://github.com/nataliya-panina/svirt/edit/devops/05-virt-03-docker-intro/img/SIGINT.png)
+![SIGCHILD](https://github.com/nataliya-panina/svirt/edit/devops/05-virt-03-docker-intro/img/SIGCHILD.png)
 
 ```
 docker run --rm -dti --name custom-nginx-t2 -p 8082:80 natapanina/custom-nginx:v1.0.0
@@ -122,7 +122,7 @@ nginx -s reload
 ```
 ![curl]()
 
-![Docker rm]()
+![Docker rm](https://github.com/nataliya-panina/svirt/edit/devops/05-virt-03-docker-intro/img/Docker_rm.png)
 
 ## Задача 4
 
@@ -142,7 +142,7 @@ docker run --rm -dti --name centos -v $(pwd):/data centos:7.9.2009
 docker run --rm -dti --name debian -v /$(pwd):/data debian
 docker exec -it centos bash
 ```
-![Volumes]()
+![Volumes](https://github.com/nataliya-panina/svirt/edit/devops/05-virt-03-docker-intro/img/Volumes.png)
 
 
 ## Задача 5
@@ -194,7 +194,7 @@ services:
 
 ## Решение
 
-![Composes]()
+![Composes](https://github.com/nataliya-panina/svirt/edit/devops/05-virt-03-docker-intro/img/Composes.png)
 Название файла по умолчанию должно быть compose.yaml или compose.yml, также поддерживаются docker-compose.yaml и docker-compose.yml, но они перешли из более старых версий утилиты. При наличии обоих файлов, предпочтение отдаётся compose.yaml
 
 Чтобы обе версии сработали, нужно просто включить файл docker-compose.yml в compose.yml при помощи include:
@@ -216,14 +216,14 @@ services:
 ```
 docker compose up -d
 ```
-![Both_composes]()
+![Both_composes](https://github.com/nataliya-panina/svirt/edit/devops/05-virt-03-docker-intro/img/Both_composes.png)
 ```
 docker tag natapanina/custom-nginx:v1.0.0 localhost:5000/custom-nginx:latest # Тэгирование образа для локального репозитория
 docker push localhost:5000/custom-nginx:latest # загрузка образа в локальный репозиторий
 
 ```
 Дальше при попытке задеплоить получаю ошибку:
-
+![error](https://github.com/nataliya-panina/svirt/edit/devops/05-virt-03-docker-intro/img/Faute.png)
 ## Deployment error
 Failed to deploy a stack: compose up operation failed: Error response from daemon: failed to set up container networking: driver failed programming external connectivity on endpoint nginx-nginx-1 (45f835ad1db14210f8e3ed401da921e5d33962ce3e7dd2d82b8314f2d1f80dd6): failed to bind host port for 0.0.0.0:9090:172.18.0.2:80/tcp: address already in use
 
