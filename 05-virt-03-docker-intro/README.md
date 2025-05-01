@@ -43,7 +43,7 @@ docker build . -t natapanina/custom-nginx:v1.0.0
 
 docker push natapanina/custom-nginx:v1.0.0
 ```
-[custom-nginx](https://hub.docker.com/repository/docker/natapanina/custom-nginx/general)
+[https://hub.docker.com/repository/docker/natapanina/custom-nginx/general](https://hub.docker.com/repository/docker/natapanina/custom-nginx/general)
 
 ## Задача 2
 1. Запустите ваш образ custom-nginx:1.0.0 командой docker run в соответвии с требованиями:
@@ -120,7 +120,7 @@ apt install nano -y
 nano /etc/nginx/conf.d/default.conf
 nginx -s reload
 ```
-![curl]()
+![curl](https://github.com/nataliya-panina/svirt/edit/devops/05-virt-03-docker-intro/img/curl_custom-nginx.png)
 
 ![Docker rm](https://github.com/nataliya-panina/svirt/edit/devops/05-virt-03-docker-intro/img/Docker_rm.png)
 
